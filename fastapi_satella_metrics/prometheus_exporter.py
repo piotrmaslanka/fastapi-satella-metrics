@@ -14,9 +14,11 @@ def PrometheusExporter(app: fastapi.FastAPI,
     def export_prometheus():
         metric = getMetric()
         metric_data = metric.to_metric_data()
+        new_values = set()
         for datum in metric_data.values:
-            if datum.internal:
-                metric_data.values.remove(datum)
+            if not datum.internal:
+                new_values.add(datum)
+        metric_data.values = new_values
         if labels is not None:
             metric_data.add_labels(labels)
         return fastapi.Response(content=metric_data_collection_to_prometheus(metric_data),

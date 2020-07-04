@@ -6,7 +6,7 @@ from satella.time import measure
 from satella.instrumentation.metrics import getMetric, Metric
 from .prometheus_exporter import PrometheusExporter
 
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 
 __all__ = ['SatellaMetricsMiddleware', 'PrometheusExporter', '__version__']
 
