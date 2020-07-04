@@ -11,13 +11,18 @@ __version__ = '1.0.2'
 __all__ = ['SatellaMetricsMiddleware', 'PrometheusExporter', '__version__']
 
 
-def SatellaMetricsMiddleware(app: fastapi.FastAPI, summary_metric: tp.Optional[Metric] = None,
+def SatellaMetricsMiddleware(app: fastapi.FastAPI,
+                             summary_metric: tp.Optional[Metric] = None,
                              histogram_metric: tp.Optional[Metric] = None,
                              response_codes_metric: tp.Optional[Metric] = None):
     """
-    Install handlers to measure metrics on an application
+    Install handlers to measure metrics on an application.
 
-    :param app: fastapi application to monitor
+    Metrics will be created by default is not specified. For summary metric it will be
+    called "requests_summary", for histogram metric it will be called "requests_histogram",
+    and for status codes "requests_response_codes".
+
+    :param app: FastAPI application to monitor
     :param summary_metric: summary metric to use. Should be of type 'summary'
     :param histogram_metric: histogram metric to use. Should be of type 'histogram'
     :param response_codes_metric: Response codes counter to use. Should be of type 'counter'

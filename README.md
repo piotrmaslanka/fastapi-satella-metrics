@@ -13,28 +13,40 @@ fastapi-satella-metrics
 fastapi-satella-metrics is an application to seamlessly measure your FastAPI
 application using Satella's metrics.
 
-Example use:
+# Installation
+```bash
+pip install fastapi-satella-metrics
+```
+
+# Example use
+
+## Collecting metrics
 
 ```python
 import fastapi
 from fastapi_satella_metrics import SatellaMetricsMiddleware
+
 app = fastapi.FastAPI()
 SatellaMetricsMiddleware(app)
 ```
 
-And to launch a Prometheus exporter use the following snippet:
+## Exporting metrics for Prometheus
+
+Using an external thread:
 
 ```python
 from satella.instrumentation.metrics.exporters import PrometheusHTTPExporterThread
-phet = PrometheusHTTPExporterThread('0.0.0.0', 8080, {'service_name': 'my_service'})
+
+phet = PrometheusHTTPExporterThread('0.0.0.0', 8080, {'extra_label_1': 'extra_value'})
 phet.start()
 ```
 
-Or, if you desire to export your metrics within Flask, just use:
+Or, if you desire to export your metrics within FastAPI, just use:
 
 ```python
 import fastapi
 from fastapi_satella_metrics import PrometheusExporter
+
 app = fastapi.FastAPI()
-PrometheusExporter(app, {'service_name': 'my_service'})
+PrometheusExporter(app, {'extra_label_1': 'extra_value'})
 ```
