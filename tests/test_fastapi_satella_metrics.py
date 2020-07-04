@@ -3,7 +3,6 @@ import time
 import unittest
 import uvicorn
 import logging
-import atexit
 import os
 import signal
 
@@ -26,7 +25,7 @@ def endpoint():
 def start():
     uvicorn.run('tests.test_fastapi_satella_metrics:app',
                 host='127.0.0.1',
-                port=8000, reload=True)
+                port=8000, reload=False)
 
 
 class TestFlaskSatellaMetrics(unittest.TestCase):
