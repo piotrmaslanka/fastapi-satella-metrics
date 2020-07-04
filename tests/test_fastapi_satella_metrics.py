@@ -20,13 +20,12 @@ def endpoint():
 
 
 def start():
-    uvicorn.run(app)
+    uvicorn.run(app, host="127.0.0.1", port=8000)
 
 
 class TestFlaskSatellaMetrics(unittest.TestCase):
     def setUp(self) -> None:
-        self.process = multiprocessing.Process(
-            target=start)
+        self.process = multiprocessing.Process(target=start)
         self.process.start()
 
     def tearDown(self) -> None:
