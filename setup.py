@@ -2,8 +2,13 @@ from setuptools import setup, find_packages
 
 from fastapi_satella_metrics import __version__
 
-setup(keywords=['fastapi', 'satella', 'metrics', 'instrumentation', 'prometheus'],
-      packages=find_packages(include=['fastapi_satella_metrics', 'fastapi_satella_metrics.*']),
+setup(keywords=['fastapi',
+                'satella',
+                'metrics',
+                'instrumentation',
+                'prometheus'],
+      packages=find_packages(include=['fastapi_satella_metrics',
+                                      'fastapi_satella_metrics.*']),
       version=__version__,
       install_requires=[
             'satella', 'fastapi'
