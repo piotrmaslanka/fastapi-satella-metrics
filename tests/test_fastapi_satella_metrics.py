@@ -3,6 +3,8 @@ import time
 import unittest
 import uvicorn
 import logging
+import os
+import signal
 
 import fastapi
 import requests
@@ -31,7 +33,7 @@ class TestFlaskSatellaMetrics(unittest.TestCase):
         time.sleep(1)
 
     def tearDown(self) -> None:
-        self.process.terminate()
+        os.kill(self.process.pid, signal.SIGINT)
         self.process.join()
 
     def test_satella_metrics(self):
