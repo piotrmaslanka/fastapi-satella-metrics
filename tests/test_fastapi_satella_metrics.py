@@ -27,6 +27,7 @@ class TestFlaskSatellaMetrics(unittest.TestCase):
     def setUp(self) -> None:
         self.process = multiprocessing.Process(target=start)
         self.process.start()
+        time.sleep(1)
 
     def tearDown(self) -> None:
         self.process.terminate()
