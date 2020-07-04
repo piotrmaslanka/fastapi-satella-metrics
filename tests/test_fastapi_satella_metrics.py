@@ -9,7 +9,6 @@ import signal
 
 import fastapi
 import requests
-import coverage
 
 import fastapi_satella_metrics
 
@@ -25,12 +24,9 @@ def endpoint():
 
 
 def start():
-    coverage.process_startup()
-    atexit.register(lambda: logger.warning('Finishing the server'))
     uvicorn.run('tests.test_fastapi_satella_metrics:app',
-                host="127.0.0.1",
-                port=8000,
-                reload=True)
+                host='127.0.0.1',
+                port=8000, reload=True)
 
 
 class TestFlaskSatellaMetrics(unittest.TestCase):
@@ -40,7 +36,8 @@ class TestFlaskSatellaMetrics(unittest.TestCase):
         time.sleep(1)
 
     def tearDown(self) -> None:
-        os.kill(self.process.pid, signal.SIGINT)
+        os.kill(self.process.pid, signal.SIGTSTP)
+        time.sleep(1)
         self.process.join()
 
     def test_satella_metrics(self):
