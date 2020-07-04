@@ -1,5 +1,7 @@
 [run]
-branch=1
+branch = True
+concurrency = multiprocessing
+parallel = True
 source=
   fastapi_satella_metrics
 omit=
