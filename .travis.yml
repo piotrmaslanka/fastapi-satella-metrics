@@ -15,7 +15,7 @@ install:
   - pip install -r requirements.txt
   - pip install coverage requests
 script:
-  - python setup.py test
+  - nose2 -vv
 after_success:
   - coverage xml
   - ./cc-test-reporter after-build -t coverage.py --exit-code $TRAVIS_TEST_RESULT
