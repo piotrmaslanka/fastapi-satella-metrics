@@ -12,8 +12,9 @@ install:
   - pip install -r requirements.txt
   - pip install coverage requests nose2
 script:
-  - coverage run --concurrency=multiprocessing -m nose2 -vv
+  - coverage run -m nose2 -vv
 after_success:
+  - coverage report
   - coverage xml
   - ./cc-test-reporter after-build -t coverage.py --exit-code $TRAVIS_TEST_RESULT
 

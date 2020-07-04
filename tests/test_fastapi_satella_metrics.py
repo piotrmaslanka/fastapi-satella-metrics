@@ -8,6 +8,7 @@ import signal
 
 import fastapi
 import requests
+import coverage
 
 import fastapi_satella_metrics
 
@@ -23,6 +24,7 @@ def endpoint():
 
 
 def start():
+    coverage.process_startup()
     uvicorn.run(app, host="127.0.0.1", port=8000)
 
 
