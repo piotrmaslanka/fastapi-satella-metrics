@@ -8,7 +8,7 @@ import signal
 
 import fastapi
 import requests
-
+from satella.instrumentation.metrics import getMetric
 import fastapi_satella_metrics
 
 logger = logging.getLogger(__name__)
@@ -23,6 +23,7 @@ def endpoint():
 
 
 def start():
+    getMetric('my.internal.metric', 'counter', internal=True)
     uvicorn.run('tests.test_fastapi_satella_metrics:app',
                 host='127.0.0.1',
                 port=8000, reload=False)
@@ -47,3 +48,4 @@ class TestFlaskSatellaMetrics(unittest.TestCase):
         self.assertEqual(q.status_code, 200)
         self.assertIn('service_name="my_service"', q.text)
         self.assertIn('requests_response_codes', q.text)
+        self.assertNotIn('my_internal_metric', q.text)
