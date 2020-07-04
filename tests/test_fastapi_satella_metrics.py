@@ -36,7 +36,7 @@ class TestFlaskSatellaMetrics(unittest.TestCase):
         time.sleep(1)
 
     def tearDown(self) -> None:
-        os.kill(self.process.pid, signal.SIGTSTP)
+        os.kill(self.process.pid, signal.SIGINT)
         time.sleep(1)
         self.process.join()
 
